@@ -43,7 +43,6 @@
   <hr/>
 
   <!-- /resources1 -->
-  <!-- /resources1 -->
 <div class="container" ng-controller="HomeController">
 
     <h1>Persoane</h1>
@@ -54,10 +53,9 @@
         <tr>
         	<th>ID</th>
         	<th>Nume</th>
-            <!-- <th ng-repeat="field in fields">{{field | uppercase}}</th> -->
             <th style="width:210px;">OPTIONS</th>
         </tr>
-        <tr ng-repeat="persoana in persoane" data-id="{{persoana.id}}">
+        <tr ng-repeat="persoana in persoane.data" data-id="{{persoana.id}}">
             <td>{{ persoana.id }}</td>
             <td>{{ persoana.name }}</td>
             <td>
@@ -124,7 +122,7 @@
 
 <hr/>
   <!-- /resources2-->
-  <div class="container">
+  <div class="container" ng-controller="HomeController">
     <h1>Carte</h1>
     <h2>List all resources</h2>
     <table class="table table-bordered">
@@ -134,10 +132,11 @@
         <th>Author</th>
         <th style="width:210px;">Options</th>
       </tr>
-      <tr>
-        <td>1</td>
-        <td>Harry Potter</td>
-        <td>J.K. Rowling</td>
+      <tr ng-repeat="carte in carti.data" data-id="{{carte.id}}">
+            <td>{{ carte.id }}</td>
+            <td>{{ carte.name }}</td>
+            <td>{{ carte.author}}</td>
+      
         <td>
           <a href="">
             <span class="label label-success">
@@ -146,66 +145,16 @@
             </span>
           </a>
           <a href="">
-            <span class="label label-primary">
+           <button ng-click="setUpdateCarte(carte)" class="btn btn-info btn-xs">
               Edit
               <span class="glyphicon glyphicon-edit"></span>
-            </span>
+            </button>
           </a>
           <a href="">
-            <span class="label label-danger">
+          <button ng-click="deleteCarte(carte.id)" class="btn btn-danger btn-xs">
               Remove
               <span class="glyphicon glyphicon-remove"></span>
-            </span>
-          </a>
-        </td>
-      </tr>
-      <tr>
-        <td>2</td>
-        <td>Les Miserables</td>
-        <td>Victor Hugo</td>
-        <td>
-          <a href="">
-            <span class="label label-success">
-              Open
-              <span class="glyphicon glyphicon-folder-open"></span>
-            </span>
-          </a>
-          <a href="">
-            <span class="label label-primary">
-              Edit
-              <span class="glyphicon glyphicon-edit"></span>
-            </span>
-          </a>
-          <a href="">
-            <span class="label label-danger">
-              Remove
-              <span class="glyphicon glyphicon-remove"></span>
-            </span>
-          </a>
-        </td>
-      </tr>
-      <tr>
-        <td>3</td>
-        <td>Rascoala</td>
-        <td>Liviu Rebreanu</td>
-        <td>
-          <a href="">
-            <span class="label label-success">
-              Open
-              <span class="glyphicon glyphicon-folder-open"></span>
-            </span>
-          </a>
-          <a href="">
-            <span class="label label-primary">
-              Edit
-              <span class="glyphicon glyphicon-edit"></span>
-            </span>
-          </a>
-          <a href="">
-            <span class="label label-danger">
-              Remove
-              <span class="glyphicon glyphicon-remove"></span>
-            </span>
+            </button>
           </a>
         </td>
       </tr>
@@ -218,15 +167,15 @@
         <form action="" method="">
           <div class="form-group">
             <label for="attribute1">Id</label>
-            <input type="text" class="form-control" id="attribute1" placeholder="Attribute 1">
+            <input type="text" class="form-control" id="attribute1" placeholder="Attribute 1" ng-model="editCarte.id">
           </div>
           <div class="form-group">
             <label for="attribute2">Name</label>
-            <input type="text" class="form-control" id="attribute2" placeholder="Attribute 2">
+            <input type="text" class="form-control" id="attribute2" placeholder="Attribute 2" ng-model="editCarte.name">
           </div>
           <div class="form-group">
             <label for="attribute2">Author</label>
-            <input type="text" class="form-control" id="attribute3" placeholder="Attribute 3">
+            <input type="text" class="form-control" id="attribute3" placeholder="Attribute 3" ng-model="editCarte.author">
           </div>
           <button type="submit" class="btn btn-info">Save</button>
         </form>
@@ -238,15 +187,15 @@
         <form action="" method="">
           <div class="form-group">
             <label for="attribute1">Id</label>
-            <input type="text" class="form-control" id="attribute1" placeholder="Attribute 1">
+            <input type="text" class="form-control" id="attribute1" placeholder="Attribute 1" ng-model="carte.id">
           </div>
           <div class="form-group">
             <label for="attribute2">Name</label>
-            <input type="text" class="form-control" id="attribute2" placeholder="Attribute 2">
+            <input type="text" class="form-control" id="attribute2" placeholder="Attribute 2" ng-model="carte.name">
           </div>
           <div class="form-group">
             <label for="attribute2">Author</label>
-            <input type="text" class="form-control" id="attribute3" placeholder="Attribute 3">
+            <input type="text" class="form-control" id="attribute3" placeholder="Attribute 3" ng-model="carte.author">
           </div>
           <button type="submit" class="btn btn-success">Add</button>
         </form>
@@ -271,7 +220,7 @@
   <hr/>
 
  <!-- /resources3-->
-  <div class="container">
+  <div class="container" ng-controller="HomeController">
     <h1>Produs</h1>
     <h2>List all resources</h2>
     <table class="table table-bordered">
@@ -281,103 +230,28 @@
         <th>Protein</th>
         <th style="width:210px;">Options</th>
       </tr>
-      <tr>
-        <td>1</td>
-        <td>Milk</td>
-        <td>3</td>
+      <tr ng-repeat="produs in produse.data" data-id="{{produs.id}}">
+            <td>{{ produs.id }}</td>
+            <td>{{ produs.name }}</td>
+            <td>{{ produs.protein}}</td>
         <td>
-          <a href="">
+           <a href="">
             <span class="label label-success">
               Open
               <span class="glyphicon glyphicon-folder-open"></span>
             </span>
           </a>
           <a href="">
-            <span class="label label-primary">
+           <button ng-click="setUpdateProdus(produs)" class="btn btn-info btn-xs">
               Edit
               <span class="glyphicon glyphicon-edit"></span>
-            </span>
+            </button>
           </a>
           <a href="">
-            <span class="label label-danger">
+          <button ng-click="deleteProdus(produs.id)" class="btn btn-danger btn-xs">
               Remove
               <span class="glyphicon glyphicon-remove"></span>
-            </span>
-          </a>
-        </td>
-      </tr>
-      <tr>
-        <td>2</td>
-        <td>Meat</td>
-        <td>20</td>
-        <td>
-          <a href="">
-            <span class="label label-success">
-              Open
-              <span class="glyphicon glyphicon-folder-open"></span>
-            </span>
-          </a>
-          <a href="">
-            <span class="label label-primary">
-              Edit
-              <span class="glyphicon glyphicon-edit"></span>
-            </span>
-          </a>
-          <a href="">
-            <span class="label label-danger">
-              Remove
-              <span class="glyphicon glyphicon-remove"></span>
-            </span>
-          </a>
-        </td>
-      </tr>
-      <tr>
-        <td>3</td>
-        <td>Breed</td>
-        <td>7</td>
-        <td>
-          <a href="">
-            <span class="label label-success">
-              Open
-              <span class="glyphicon glyphicon-folder-open"></span>
-            </span>
-          </a>
-          <a href="">
-            <span class="label label-primary">
-              Edit
-              <span class="glyphicon glyphicon-edit"></span>
-            </span>
-          </a>
-          <a href="">
-            <span class="label label-danger">
-              Remove
-              <span class="glyphicon glyphicon-remove"></span>
-            </span>
-          </a>
-        </td>
-      </tr>
-       <tr>
-        <td>4</td>
-        <td>Egs</td>
-        <td>14</td>
-        <td>
-          <a href="">
-            <span class="label label-success">
-              Open
-              <span class="glyphicon glyphicon-folder-open"></span>
-            </span>
-          </a>
-          <a href="">
-            <span class="label label-primary">
-              Edit
-              <span class="glyphicon glyphicon-edit"></span>
-            </span>
-          </a>
-          <a href="">
-            <span class="label label-danger">
-              Remove
-              <span class="glyphicon glyphicon-remove"></span>
-            </span>
+            </button>
           </a>
         </td>
       </tr>
@@ -389,15 +263,15 @@
         <form action="" method="">
           <div class="form-group">
             <label for="attribute1">Id</label>
-            <input type="text" class="form-control" id="attribute1" placeholder="Attribute 1">
+            <input type="text" class="form-control" id="attribute1" placeholder="Attribute 1" ng-model="editProdus.id">
           </div>
           <div class="form-group">
             <label for="attribute2">Name</label>
-            <input type="text" class="form-control" id="attribute2" placeholder="Attribute 2">
+            <input type="text" class="form-control" id="attribute2" placeholder="Attribute 2" ng-model="editProdus.name">
           </div>
           <div class="form-group">
             <label for="attribute2">Protein</label>
-            <input type="text" class="form-control" id="attribute3" placeholder="Attribute 3">
+            <input type="text" class="form-control" id="attribute3" placeholder="Attribute 3" ng-model="editProdus.protein">
           </div>
           <button type="submit" class="btn btn-info">Save</button>
         </form>
@@ -409,15 +283,15 @@
         <form action="" method="">
           <div class="form-group">
             <label for="attribute1">Id</label>
-            <input type="text" class="form-control" id="attribute1" placeholder="Attribute 1">
+            <input type="text" class="form-control" id="attribute1" placeholder="Attribute 1" ng-model="produs.id">
           </div>
           <div class="form-group">
             <label for="attribute2">Name</label>
-            <input type="text" class="form-control" id="attribute2" placeholder="Attribute 2">
+            <input type="text" class="form-control" id="attribute2" placeholder="Attribute 2" ng-model="produs.name">
           </div>
           <div class="form-group">
             <label for="attribute2">Protein</label>
-            <input type="text" class="form-control" id="attribute3" placeholder="Attribute 3">
+            <input type="text" class="form-control" id="attribute3" placeholder="Attribute 3" ng-model="produs.protein">
           </div>
           <button type="submit" class="btn btn-success">Add</button>
         </form>
@@ -446,7 +320,7 @@
     </footer>
   </div>
 <!-- /resources4-->
-  <div class="container">
+  <div class="container" ng-controller="HomeController">
     <h1>Bautura</h1>
     <h2>List all resources</h2>
     <table class="table table-bordered">
@@ -456,78 +330,28 @@
         <th>Alcohol Proof</th>
         <th style="width:210px;">Options</th>
       </tr>
-      <tr>
-        <td>1</td>
-        <td>Apa</td>
-        <td>0%</td>
-        <td>
-          <a href="">
+     <tr ng-repeat="bautura in bauturi.data" data-id="{{bautura.id}}">
+            <td>{{ bautura.id }}</td>
+            <td>{{ bautura.name }}</td>
+            <td>{{ bautura.alchoolProof}}</td>
+         <td>
+           <a href="">
             <span class="label label-success">
               Open
               <span class="glyphicon glyphicon-folder-open"></span>
             </span>
           </a>
           <a href="">
-            <span class="label label-primary">
+           <button ng-click="setUpdateBautura(bautura)" class="btn btn-info btn-xs">
               Edit
               <span class="glyphicon glyphicon-edit"></span>
-            </span>
+            </button>
           </a>
           <a href="">
-            <span class="label label-danger">
+          <button ng-click="deleteBautura(bautura.id)" class="btn btn-danger btn-xs">
               Remove
               <span class="glyphicon glyphicon-remove"></span>
-            </span>
-          </a>
-        </td>
-      </tr>
-      <tr>
-        <td>2</td>
-        <td>Bere</td>
-        <td>5%</td>
-        <td>
-          <a href="">
-            <span class="label label-success">
-              Open
-              <span class="glyphicon glyphicon-folder-open"></span>
-            </span>
-          </a>
-          <a href="">
-            <span class="label label-primary">
-              Edit
-              <span class="glyphicon glyphicon-edit"></span>
-            </span>
-          </a>
-          <a href="">
-            <span class="label label-danger">
-              Remove
-              <span class="glyphicon glyphicon-remove"></span>
-            </span>
-          </a>
-        </td>
-      </tr>
-      <tr>
-        <td>3</td>
-        <td>Gin</td>
-        <td>45%</td>
-        <td>
-          <a href="">
-            <span class="label label-success">
-              Open
-              <span class="glyphicon glyphicon-folder-open"></span>
-            </span>
-          </a>
-          <a href="">
-            <span class="label label-primary">
-              Edit
-              <span class="glyphicon glyphicon-edit"></span>
-            </span>
-          </a>
-          <a href="">
-            <span class="label label-danger">
-              Remove
-              <span class="glyphicon glyphicon-remove"></span>
-            </span>
+            </button>
           </a>
         </td>
       </tr>
@@ -540,15 +364,15 @@
         <form action="" method="">
           <div class="form-group">
             <label for="attribute1">Id</label>
-            <input type="text" class="form-control" id="attribute1" placeholder="Attribute 1">
+            <input type="text" class="form-control" id="attribute1" placeholder="Attribute 1" ng-model="editBautura.id">
           </div>
           <div class="form-group">
             <label for="attribute2">Name</label>
-            <input type="text" class="form-control" id="attribute2" placeholder="Attribute 2">
+            <input type="text" class="form-control" id="attribute2" placeholder="Attribute 2" ng-model="editBautura.name">
           </div>
           <div class="form-group">
             <label for="attribute2">Author</label>
-            <input type="text" class="form-control" id="attribute3" placeholder="Attribute 3">
+            <input type="text" class="form-control" id="attribute3" placeholder="Attribute 3" ng-model="editBautura.alchoolProof">
           </div>
           <button type="submit" class="btn btn-info">Save</button>
         </form>
@@ -560,15 +384,15 @@
         <form action="" method="">
           <div class="form-group">
             <label for="attribute1">Id</label>
-            <input type="text" class="form-control" id="attribute1" placeholder="Attribute 1">
+            <input type="text" class="form-control" id="attribute1" placeholder="Attribute 1" ng-model="bautura.id">
           </div>
           <div class="form-group">
             <label for="attribute2">Name</label>
-            <input type="text" class="form-control" id="attribute2" placeholder="Attribute 2">
+            <input type="text" class="form-control" id="attribute2" placeholder="Attribute 2" ng-model="bautura.name">
           </div>
           <div class="form-group">
             <label for="attribute2">Author</label>
-            <input type="text" class="form-control" id="attribute3" placeholder="Attribute 3">
+            <input type="text" class="form-control" id="attribute3" placeholder="Attribute 3" ng-model="bautura.alchoolProof">
           </div>
           <button type="submit" class="btn btn-success">Add</button>
         </form>
